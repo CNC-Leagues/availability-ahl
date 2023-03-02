@@ -63,7 +63,7 @@ class UilityCommands(commands.Cog):
 
             print(role.position, highest_role.position)
             
-            if role.position >= highest_role.position:
+            if role.position <= highest_role.position:
                 return await interaction.followup.send("Can't assign this role")
 
         await player.add_roles(role)
