@@ -60,7 +60,8 @@ class UilityCommands(commands.Cog):
                 )
 
             highest_role = get(interaction.guild.roles, name="Owner")
-            if role > highest_role:
+
+            if role.position >= highest_role.position:
                 return await interaction.followup.send("Can't assign this role")
 
         await player.add_roles(role)
