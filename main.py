@@ -19,7 +19,7 @@ class Availability(commands.AutoShardedBot):
         self.prisma = Prisma()
 
     async def on_ready(self):
-        await self.prisma.connect()
+        # await self.prisma.connect()
 
         print(f"{self.user} is ready..")
 
@@ -42,8 +42,8 @@ class Availability(commands.AutoShardedBot):
 
 bot = Availability(command_prefix="a.", intents=intents)
 
-bot.load_extension("cogs.commands")
-bot.load_extension("cogs.task")
+# bot.load_extension("cogs.commands")
+# bot.load_extension("cogs.task")
 bot.load_extension("cogs.utility")
 
 TOKEN = os.environ["TOKEN"]
