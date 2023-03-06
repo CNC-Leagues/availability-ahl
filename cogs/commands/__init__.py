@@ -45,17 +45,16 @@ class TaskerCommands(commands.Cog):
                 content="You can't submit availability in this channel"
             )
 
-        tu_times = TimeView()
-        wd_times = TimeView()
-        th_times = TimeView()
+        su_times = TimeView()
+        mo_times = TimeView()
 
         await interaction.edit_original_message(
-            content="On **Tuesday** which times will you be available to play?",
-            view=tu_times,
+            content="On **Sunday** which times will you be available to play?",
+            view=su_times,
         )
-        await tu_times.wait()
+        await su_times.wait()
 
-        if tu_times.cancelled:
+        if su_times.cancelled:
             return await interaction.edit_original_message(
                 content="❌ Cancelled!",
                 view=None,
@@ -63,23 +62,11 @@ class TaskerCommands(commands.Cog):
 
         await interaction.edit_original_message(
             content="On **Wednessday** which times will you be available to play?",
-            view=wd_times,
+            view=mo_times,
         )
-        await wd_times.wait()
+        await mo_times.wait()
 
-        if wd_times.cancelled:
-            return await interaction.edit_original_message(
-                content="❌ Cancelled!",
-                view=None,
-            )
-
-        await interaction.edit_original_message(
-            content="On **Thursday** which times will you be available to play?",
-            view=th_times,
-        )
-        await th_times.wait()
-
-        if th_times.cancelled:
+        if mo_times.cancelled:
             return await interaction.edit_original_message(
                 content="❌ Cancelled!",
                 view=None,
@@ -97,9 +84,8 @@ class TaskerCommands(commands.Cog):
 
         message = (
             f"{interaction.user.mention} is available \n"
-            f"**Tuesday**: {'/'.join(tu_times.slots) or 'None'} \n"
-            f"**Wednessday**: {'/'.join(wd_times.slots) or 'None'} \n"
-            f"**Thursday**: {'/'.join(th_times.slots) or 'None'}"
+            f"**Sunday**: {'/'.join(su_times.slots) or 'None'} \n"
+            f"**Monday**: {'/'.join(mo_times.slots) or 'None'} \n"
         )
 
         SUBMISSION_LOG_CHANNEL = get(
@@ -127,9 +113,8 @@ class TaskerCommands(commands.Cog):
             name="day",
             description="Select the day of the game",
             choices={
-                "Tuesday": "Tuesday",
-                "Wednesday": "Wednesday",
-                "Thursday": "Thursday",
+                "Sunday": "Sunday",
+                "Monday": "Monday",
             },
         ),
         time: str = SlashOption(
@@ -139,6 +124,7 @@ class TaskerCommands(commands.Cog):
                 "8:30": "8:30",
                 "9:15": "9:15",
                 "10:00": "10:00",
+                "10:30": "10:30",
             },
         ),
         left_wing: Member = SlashOption(description="Select left wing player"),
@@ -238,9 +224,8 @@ class TaskerCommands(commands.Cog):
             name="day",
             description="Select the day of the game",
             choices={
-                "Tuesday": "Tuesday",
-                "Wednesday": "Wednesday",
-                "Thursday": "Thursday",
+                "Sunday": "Sunday",
+                "Monday": "Monday",
             },
             required=False,
         ),

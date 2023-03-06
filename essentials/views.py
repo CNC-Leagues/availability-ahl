@@ -50,6 +50,14 @@ class TimeView(ui.View):
         ) if button.custom_id in self.slots else self.slots.append(button.custom_id)
 
         await self._update(interaction)
+    
+    @ui.button(label="10:30pm EST", style=ButtonStyle.primary, custom_id="10:30pm EST")
+    async def tp(self, button: ui.Button, interaction: Interaction):
+        self.slots.remove(
+            button.custom_id
+        ) if button.custom_id in self.slots else self.slots.append(button.custom_id)
+
+        await self._update(interaction)
 
     @ui.button(label="None", style=ButtonStyle.secondary, custom_id="None")
     async def none(self, button: ui.Button, interaction: Interaction):
