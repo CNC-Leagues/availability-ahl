@@ -236,6 +236,7 @@ class TaskerCommands(commands.Cog):
                 "8:30": "8:30",
                 "9:15": "9:15",
                 "10:00": "10:00",
+                "10:30": "10:30",
             },
             required=False,
         ),
