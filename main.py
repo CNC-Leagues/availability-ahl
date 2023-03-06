@@ -31,14 +31,14 @@ class Availability(commands.AutoShardedBot):
 
     def get_command_mention(self, guild_id: int, command_name) -> str:
         cmd = None
-        all_commands = self.get_guild(guild_id).get_application_commands()
+        all_commands = self.get_application_commands()
 
         for command in all_commands:
             if command.qualified_name == command_name:
                 cmd = command
 
         if cmd:
-            return f"</{command_name}:{cmd.command_ids[guild_id]}>"
+            return f"</{command_name}:{cmd.command_ids[None]}>"
         else:
             return f"/{command_name}"
 
