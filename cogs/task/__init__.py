@@ -2,7 +2,15 @@ import datetime
 from typing import List, Union
 
 from aioscheduler import TimedScheduler
-from nextcord import Member, PermissionOverwrite, Role, TextChannel, slash_command, SlashOption, Interaction
+from nextcord import (
+    Member,
+    PermissionOverwrite,
+    Role,
+    TextChannel,
+    slash_command,
+    SlashOption,
+    Interaction,
+)
 from nextcord.ext import commands, tasks
 from nextcord.utils import get
 
@@ -47,9 +55,15 @@ class Tasker(commands.Cog):
         ),
     ):
         await interaction.response.defer(ephemeral=True)
+
+        if interaction.user.id != interaction.guild.owner.id:
+            return await interaction.edit_original_message(
+                content="You are not allowed to run this command."
+            )
+
         await self.task_functions[day](simulation=True)
         await interaction.edit_original_message(content="The simulation completed")
-    
+
     def get_permissions(self, state: bool):
         permission_overwrites = PermissionOverwrite()
         permission_overwrites.send_messages = state
