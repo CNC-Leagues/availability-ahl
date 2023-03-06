@@ -61,7 +61,7 @@ class TaskerCommands(commands.Cog):
             )
 
         await interaction.edit_original_message(
-            content="On **Wednessday** which times will you be available to play?",
+            content="On **Monday** which times will you be available to play?",
             view=mo_times,
         )
         await mo_times.wait()
