@@ -9,6 +9,7 @@ services:
       - ./database:/var/lib/postgresql/data
   bot:
     build: ./
+    restart: on-failure
     depends_on:
       - database
     environment:
